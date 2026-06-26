@@ -57,14 +57,9 @@ ELEXProt liest eine PADF- oder PADFX-Messdatei ein und erzeugt pro Unterverteile
 
 ### Arbeitsstand & Datenbank
 - **SQLite-Datenbank** (`%APPDATA%\ELEXProt\padf_archiv.db`) speichert alle UVs und Stromkreise
-- **Lebender Arbeitsstand** (`work_circuits`): ISO-Regeln, Testdaten, RPE-Ergänzungen und manuelle Korrekturen werden pro UV in der DB gespeichert – der Export liest daraus, nicht aus der PADF
-- **UV-Reset**: löscht den Arbeitsstand der UV und liest circuits + work_circuits frisch aus der PADF ein (Parser läuft neu → kein Stale-Cache); Fallback auf DB-Cache wenn PADF nicht mehr erreichbar
+- **Lebender Arbeitsstand**: manuelle Korrekturen werden pro UV in der DB gespeichert – der Export liest daraus, nicht aus der PADF
+- **UV-Reset**: löscht den Arbeitsstand der UV und liest circuits frisch aus der PADF ein (Parser läuft neu → kein Stale-Cache); Fallback auf DB-Cache wenn PADF nicht mehr erreichbar
 - Gesperrte UVs (als „fertig" markiert) bleiben vom Reset unberührt
-
-### Schnell-Werkzeuge (Ctrl+I)
-- **ISO-Schnellregeln**: Regex-basierte Massenzuweisung von RISO-Werten (z. B. „Bel\*→>200", „Steckd\*→>999") – schreibt nur in leere Felder; Reset stellt exakt die berührten Felder auf PADF-Baseline zurück
-- **Testdaten**: füllt leere ZS/Ik- und ZL/Ik-Felder mit plausiblen Testwerten
-- **RPE-Ergänzen**: berechnet fehlende RPE-Werte aus ZL/2 (Untergrenze: Einspeisung RPE)
 
 ### Excel-Rückimport
 - Manuell bearbeitete `.xlsx`-Dateien können zurückgelesen werden (Button „Excel zurücklesen")
@@ -105,5 +100,5 @@ ELEXProt liest eine PADF- oder PADFX-Messdatei ein und erzeugt pro Unterverteile
 | **2.4.0** | UV-Reset-Button, Archiv-Highlighting, Fensterbreite optimiert |
 | **2.3.x** | BENNING Custom-Charakteristik (P430), automatische Mängelwarnungen im UV-Listing, Bemerkungsblatt bei Grenzwertverletzungen, Klartext-Fehlermeldungen, UV-Reset parst frisch aus PADF |
 | **2.2.x** | Protokoll-Archiv (SQLite-Snapshots), Re-Export, Excel-Rückimport |
-| **2.1.x** | DB-Arbeitsstand, ISO-Schnellregeln, Testdaten, RPE-Ergänzen |
+| **2.1.x** | DB-Arbeitsstand, manuelle Korrekturen, RPE-Ergänzen |
 | **2.0.x** | PySide6-GUI, Deckblatt-Vorschau, Foto-Integration, Bemerkungsblatt |
