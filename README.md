@@ -1,6 +1,6 @@
 # ELEXProt – Elektrische Prüfprotokolle aus PADF/PADFX
 
-Windows-Desktop-Tool zum automatischen Erstellen von Prüfprotokollen (Excel `.xlsx`) aus PADF/PADFX-Messdateien von **BENNING** und **Metrel**-Prüfgeräten.
+Windows-Desktop-Tool zum automatischen Erstellen von Prüfprotokollen (Excel `.xlsx`) aus PADF/PADFX-Messdateien elektrischer Prüfgeräte.
 
 Die neueste Version steht unter [Releases](../../releases) zum Download bereit.
 
@@ -23,7 +23,6 @@ ELEXProt liest eine PADF- oder PADFX-Messdatei ein und erzeugt pro Unterverteile
 ### Einlesen & Parsen
 - Unterstützt `.padf` (XML) und `.padfx` (ZIP-Archiv)
 - Erkennt alle gängigen Sicherungscharakteristiken: **B, C, D, G, K, Z, L, U, MA, gG, gL, NV, NH**
-- Liest BENNING-eigene Custom-Charakteristiken korrekt aus (z. B. „Custom G" → Charakteristik `G` via Eigenschaft P430)
 - Unterstützt FI-Gruppen mit verschachtelten Unterkreisen
 - Einspeisung wird separat als eigene Zeile ausgewiesen
 
@@ -58,7 +57,7 @@ ELEXProt liest eine PADF- oder PADFX-Messdatei ein und erzeugt pro Unterverteile
 ### Arbeitsstand & Datenbank
 - **SQLite-Datenbank** (`%APPDATA%\ELEXProt\padf_archiv.db`) speichert alle UVs und Stromkreise
 - **Lebender Arbeitsstand**: manuelle Korrekturen werden pro UV in der DB gespeichert – der Export liest daraus, nicht aus der PADF
-- **UV-Reset**: löscht den Arbeitsstand der UV und liest circuits frisch aus der PADF ein (Parser läuft neu → kein Stale-Cache); Fallback auf DB-Cache wenn PADF nicht mehr erreichbar
+- **UV-Reset**: löscht den Arbeitsstand der UV und liest die Daten frisch aus der PADF-Datei ein; Fallback auf DB-Cache wenn die Datei nicht mehr erreichbar ist
 - Gesperrte UVs (als „fertig" markiert) bleiben vom Reset unberührt
 
 ### Excel-Rückimport
@@ -70,7 +69,6 @@ ELEXProt liest eine PADF- oder PADFX-Messdatei ein und erzeugt pro Unterverteile
 - Jeder Export wird als unveränderlicher Snapshot gespeichert
 - Archiv-Fenster: dreispaltige Übersicht (Dateien | UVs | Stromkreise + Export-Verlauf)
 - **Re-Export aus Snapshot**: vergangene Exporte können 1:1 reproduziert werden, auch wenn sich der Arbeitsstand oder die Konfiguration inzwischen geändert hat
-- SHA-256-Deduplizierung der PADF-Quelldateien
 
 ### PDF-Export
 - Direkt aus dem Programm: Excel-COM (PowerShell) → PDF
@@ -97,8 +95,7 @@ ELEXProt liest eine PADF- oder PADFX-Messdatei ein und erzeugt pro Unterverteile
 
 | Version | Änderungen |
 |---------|-----------|
+| **2.5.0** | Automatische Mängelwarnungen, Klartext-Fehlermeldungen, Bemerkungsblatt-Layout, UV-Reset parst frisch aus PADF |
 | **2.4.0** | UV-Reset-Button, Archiv-Highlighting, Fensterbreite optimiert |
-| **2.3.x** | BENNING Custom-Charakteristik (P430), automatische Mängelwarnungen im UV-Listing, Bemerkungsblatt bei Grenzwertverletzungen, Klartext-Fehlermeldungen, UV-Reset parst frisch aus PADF |
 | **2.2.x** | Protokoll-Archiv (SQLite-Snapshots), Re-Export, Excel-Rückimport |
-| **2.1.x** | DB-Arbeitsstand, manuelle Korrekturen, RPE-Ergänzen |
 | **2.0.x** | PySide6-GUI, Deckblatt-Vorschau, Foto-Integration, Bemerkungsblatt |
